@@ -10,6 +10,8 @@ import Input.MouseManager;
 import Resources.Images;
 
 import javax.sound.sampled.*;
+import javax.swing.JOptionPane;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -74,7 +76,6 @@ public class GameSetUp implements Runnable {
         display.getCanvas().addMouseMotionListener(mouseManager);
 
         Images img = new Images();
-
 
         handler = new Handler(this);
 
@@ -172,7 +173,6 @@ public class GameSetUp implements Runnable {
         g = bs.getDrawGraphics();
         //Clear Screen
         g.clearRect(0, 0, width, height);
-
         //Draw Here!
 
         g.drawImage(loading ,0,0,width,height,null);
@@ -183,8 +183,8 @@ public class GameSetUp implements Runnable {
         //End Drawing!
         bs.show();
         g.dispose();
+    
     }
-
     public synchronized void stop(){
         if(!running)
             return;

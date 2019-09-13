@@ -3,6 +3,7 @@ package Main;
 import Input.KeyManager;
 import Input.MouseManager;
 import Worlds.WorldBase;
+import Worlds.WorldOne;
 
 
 /**
@@ -14,6 +15,9 @@ public class Handler {
 
     private GameSetUp game;
     private WorldBase world;
+    private WorldOne worldOne;
+    private Game.Entities.Static.Apple apple;
+    private Game.Entities.Dynamic.Player lenght;
 
     public Handler(GameSetUp game){
         this.game = game;
@@ -47,9 +51,16 @@ public class Handler {
         return world;
     }
 
+    public WorldOne getWorldOne() {
+        return worldOne;
+    }
+    
     public void setWorld(WorldBase world) {
         this.world = world;
     }
 
-
+    public boolean getAppleState() {
+    	return (apple.isGood());
+    }
 }
+
