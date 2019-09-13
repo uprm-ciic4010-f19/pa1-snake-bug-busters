@@ -17,7 +17,6 @@ public class Handler {
     private WorldBase world;
     private WorldOne worldOne;
     private Game.Entities.Static.Apple apple;
-    private Game.Entities.Dynamic.Player lenght;
 
     public Handler(GameSetUp game){
         this.game = game;

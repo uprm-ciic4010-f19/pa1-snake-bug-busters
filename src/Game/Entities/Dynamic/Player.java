@@ -26,6 +26,7 @@ public class Player {
 
     public int lenght;
     public boolean justAte;
+	boolean isDead;
     public int currScore;
     public String scoreStr;
     private Handler handler;
@@ -37,6 +38,8 @@ public class Player {
     public int speed;
     
 	public int snakeSteps;
+    public int coinCredit;
+    public String creditStr;
     
     public String direction;//is your first name one?
     
@@ -57,6 +60,8 @@ public class Player {
         scoreStr = Integer.toString(currScore);
         lenght= 1;
         snakeSteps = 0;
+        coinCredit = 0;
+        creditStr = Integer.toString(coinCredit);
     }   
  
     public void tick(){
@@ -105,7 +110,7 @@ public class Player {
     	handler.getWorld().playerLocation[xCoord][yCoord]=false;
     	int x = xCoord;
     	int y = yCoord;
-    	boolean isDead = false;
+    	isDead = false;
     	switch (direction){
     	case "Left":
     		if(xCoord!=0){
@@ -158,6 +163,8 @@ public class Player {
         if(isDead==false) {
         	handler.getWorld().playerLocation[xCoord][yCoord]=true;
 
+        	if(handler.getWorld().coinLocation[xCoord][yCoord]){
+        		gotCoin(); }
 
         	if(handler.getWorld().appleLocation[xCoord][yCoord]){
         		Eat(); }
@@ -177,7 +184,8 @@ public class Player {
         Random r = new Random();
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-                g.drawString("score:" + scoreStr, 680, 740);
+                g.drawString("score:" + scoreStr, 680, 700);
+                g.drawString("credit:" + creditStr, 680, 740);
                 g.setColor(Color.green);
                 if(playeLocation[i][j]){
                 	g.setColor(Color.green);
@@ -199,8 +207,15 @@ public class Player {
                             handler.getWorld().GridPixelsize,
                             handler.getWorld().GridPixelsize); }
                 	}
+                if(handler.getWorld().coinLocation[i][j]){
+                	g.setColor(Color.yellow);
+            		g.fillOval((i*handler.getWorld().GridPixelsize),
+                        (j*handler.getWorld().GridPixelsize),
+                        handler.getWorld().GridPixelsize,
+                        handler.getWorld().GridPixelsize); }
+                }
             }}
-            }
+       
         
     public int stepsCounter() {
     	int playerX2 = this.xCoord;
@@ -236,6 +251,14 @@ public class Player {
         snakeSteps = 0;
         xSteps = 0;
         ySteps = 0;
+    }
+    public void gotCoin() {
+    	handler.getWorld().coinLocation[xCoord][yCoord]=false;
+        handler.getWorld().coinOnBoard=false;
+        coinCredit ++;
+        creditStr = Integer.toString(coinCredit);
+        
+        
     }
     public void addTail(){
     lenght++;
@@ -342,7 +365,7 @@ public class Player {
     handler.getWorld().body.addLast(tail);
     handler.getWorld().playerLocation[tail.x][tail.y] = true;
 }
-   
+    
     public void substractTail(){
     lenght--;
     Tail tail= null;

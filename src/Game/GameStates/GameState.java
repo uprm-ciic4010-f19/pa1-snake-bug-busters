@@ -25,6 +25,7 @@ public class GameState extends State {
 
                 handler.getWorld().playerLocation[i][j]=false;
                 handler.getWorld().appleLocation[i][j]=false;
+                handler.getWorld().coinLocation[i][j]=false;
 
             }
         }
@@ -32,7 +33,6 @@ public class GameState extends State {
 
 
     }
-
     @Override
     public void tick() {
 

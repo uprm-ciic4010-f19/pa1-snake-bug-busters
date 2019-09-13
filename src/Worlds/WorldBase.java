@@ -4,6 +4,7 @@ import Game.Entities.Dynamic.Player;
 import Game.Entities.Dynamic.Tail;
 import Game.Entities.Static.Apple;
 import Main.Handler;
+import Game.Entities.Static.Coins;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -34,6 +35,10 @@ public abstract class WorldBase {
     public Boolean appleOnBoard;
     protected Apple apple;
     public Boolean[][] appleLocation;
+    
+    public Boolean coinOnBoard;
+    protected Coins coins;
+    public Boolean[][] coinLocation;
 
 
     public Boolean[][] playerLocation;
@@ -45,8 +50,7 @@ public abstract class WorldBase {
         this.handler = handler;
 
         appleOnBoard = false;
-
-
+        coinOnBoard = false;
     }
     public void tick(){
 
@@ -69,6 +73,9 @@ public abstract class WorldBase {
     }
     public Apple getApple() {
     	return (apple); }
+    
+    public Coins getCoins() {
+    	return (coins); }
     	
 
 
